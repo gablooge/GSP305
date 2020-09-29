@@ -10,6 +10,12 @@
 # done
 
 
+# gcloud config set compute/zone us-central1-a 
+# gcloud container clusters create echo-cluster \
+# --num-nodes 2 \
+# --machine-type n1-standard-2
+
+
 gcloud container clusters get-credentials echo-cluster --zone=us-central1-a
 
 
@@ -22,6 +28,7 @@ export PROJECT_ID=$(gcloud info --format='value(config.project)')
 
 gsutil cp gs://${PROJECT_ID}/echo-web-v2.tar.gz .
 tar -xvzf echo-web-v2.tar.gz
+# cd echo
 
 docker build -t echo-app:v2 .
 docker tag echo-app:v2 gcr.io/${PROJECT_ID}/echo-app:v2
